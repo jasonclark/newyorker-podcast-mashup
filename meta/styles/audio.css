@@ -1,0 +1,44 @@
+/*Styles for spirs.lib.montana.edu/audio/
+Author:   Jason A. Clark
+Version:  screen,projection,handheld - April 2009
+----------------------------------------------- */
+/* =global default settings
+----------------------------------------------- */
+body {font:1em normal Arial, Helvetica, sans-serif;margin:0;padding:0;line-height:1.7em;}
+*, * focus {outline:none;margin:0;padding:0;}
+/* =element-specific settings
+----------------------------------------------- */
+h1 {font:3.2em normal Georgia,'Times New Roman',Times,serif;padding:20px 0;color:#666;text-align:center;}
+h1 span {color:#aaa;}
+h1 small {font:0.3em normal Verdana, Arial, Helvetica, sans-serif;text-transform:uppercase;letter-spacing:1em;display:block;color: #666;}
+h2.mainHeading {}
+/* =tabbed content box (includes ul#tabs and div#tabContents)
+----------------------------------------------- */
+ul#tabs {margin:0 0 20px 0;padding-bottom:35px;padding-left:20px;list-style-type:none;border-bottom:1px solid #ccc;}
+ul#tabs li {margin:0;padding:0;display:inline;}
+#tabs a:link, #tabs a:visited {margin-right:8px;padding:10px;background:#F2F2F2;border:1px solid #ccc;color:#666;float:left;font-size:1em;font-weight:normal;line-height:14px;text-decoration:none;border-top-left-radius:4px;border-top-right-radius:4px;-moz-border-radius-topleft:4px;-webkit-border-top-left-radius:4px;-moz-border-radius-topright:4px;-webkit-border-top-right-radius:4px;}
+#tabs a:link.active, #tabs a:visited.active	{color:#000;background:#fff;border-bottom:1px solid #fff;}
+#tabs a:hover {color:#001155;}
+body.default #tabs li#tab1 a, body.what #tabs li#tab2 a, body.search #tabs li#tab3 a {color:#000;background:#fff;border-bottom:1px solid #fff;}
+div#tabContents {margin:0 0 15px 0;padding:15px;clear:both;background:#fff;border:1px solid #ccc;border-top:none;}
+/* =container
+----------------------------------------------- */
+.container {width:90%;margin:0 auto;}
+/* =main
+----------------------------------------------- */
+div.main {margin:0 0 5px;padding:0 30px;overflow:hidden;font-size:.95em;width:100%;clear:both;}
+div.main .block {padding: 20px;background: #f0f0f0;border:1px solid #ccc;border-radius:7px;-moz-border-radius:7px;/* Mozilla */-webkit-border-radius:7px;/* Webkit */background:#F2F2F2;}
+div.main .block p {padding:5px 0;margin:5px 0;}
+div.main .block h3 {font:2em normal Georgia, "Times New Roman", Times, serif;margin: 0 0 10px;padding: 0 0 5px 0;border-bottom: 1px solid #ccc;}
+div.main .block img {float:left;margin: 10px 15px 15px 0;padding: 5px;background: #ddd;border: 1px solid #ccc;}
+/* =miscellaneous and special global settings
+----------------------------------------------- */
+.postTitle {margin:25px 0 0 0;font:normal normal bold 1.1em/100% "arial",sans-serif;}
+.postMetadata {line-height:16px;background:url("../img/time.gif") 0 50% no-repeat;margin-bottom:25px;padding:5px 0 5px 19px;border-top:2px solid #f2f2f2;}
+.comment {line-height:16px;background:url("../img/comments.gif") 0 50% no-repeat;margin-left:25px;padding-left:19px;}
+span.date{display:block;text-transform:uppercase;font-size:.75em;color:#9f9f9f;padding-bottom:5px}
+.download {line-height:25px;background:url("../img/download.png") 0 50% no-repeat;margin-left:25px;padding-left:19px;}
+a.feed {margin:0 0 0 30px;padding:3px 3px 3px 18px;font-size:.6em;background:url("../img/feed.gif") no-repeat center left;}
+.postControls {margin:0 0 25px 0;padding:3px 0;}
+/*.play {line-height:16px;background:url("../img/play.png") 0 50% no-repeat;padding-left:19px;}*/
+object.play {width:300px;height:30px;line-height:30px;margin:0;padding:0;}
