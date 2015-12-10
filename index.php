@@ -41,12 +41,16 @@ if ($customScript) {
     </ul><!-- end tabs unordered list -->
 	<div class="main">
 	<?php
+	//set default value for podcast feed
+	//new yorker poetry podcast feed
+	//$feed = isset($_GET['feed']) ? $_GET['feed'] : 'http://feeds.wnyc.org/tnypoetry?format=xml';
+	//new yorker fiction podcast feed
+	$feed = isset($_GET['feed']) ? $_GET['feed'] : 'http://feeds.wnyc.org/tnyfiction?format=xml';
+	
 	//set limit for number of items to display
-	$limit = (empty($_GET['limit'])) ? '15' : (int)$_GET['limit'];
-	    
-	//request xml feed from external source 
-	$request = 'http://feeds.newyorker.com/services/rss/feeds/fiction_podcast.xml';
-	$xml = simplexml_load_file($request);
+	$limit = (empty($_GET['limit'])) ? '15' : (int)$_GET['limit']
+
+	$xml = simplexml_load_file($feed);
 	
 	$feedTitle = $xml->channel->title;
 	$feedDescription = html_entity_decode(substr($xml->channel->description,0,86)).'...';
