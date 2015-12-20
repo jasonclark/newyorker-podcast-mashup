@@ -25,7 +25,7 @@ $fileNameURI = htmlentities(strip_tags($_SERVER['REQUEST_URI']));
 <!-- Social Media Tags -->
 <meta property="og:title" content="New Yorker Podcast Remix, Spotlight on Ficiton"/>
 <meta property="og:description" content="Remix of a New Yorker podcast feed with a local .mp3 player."/>
-<meta property="og:image" content="<?php echo $protocol.$server.$path; ?>/meta/img/share-code-small.png"/>
+<meta property="og:image" content="<?php echo $protocol.$server.$path; ?>/meta/img/clark-share-default.png"/>
 <meta property="og:url" content="<?php echo $protocol.$server.$path.'/'.$fileName; ?>"/>
 <meta property="og:type" content="website"/>
 <meta name="twitter:creator" property="og:site_name" content="@jaclark"/>
