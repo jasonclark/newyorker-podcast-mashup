@@ -14,11 +14,24 @@ $path = htmlentities(strip_tags(dirname($_SERVER['PHP_SELF'])));
 $fileName = htmlentities(strip_tags(basename($_SERVER['SCRIPT_NAME'])));
 $fileNameURI = htmlentities(strip_tags($_SERVER['REQUEST_URI']));
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!doctype html>
+<html lang="en">
 <head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title><?php echo($pageTitle); ?> : Montana State University Libraries</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Remix of a New Yorker podcast feed with a local .mp3 player."/>
+<!-- Social Media Tags -->
+<meta property="og:title" content="New Yorker Podcast Remix, Spotlight on Ficiton"/>
+<meta property="og:description" content="Remix of a New Yorker podcast feed with a local .mp3 player."/>
+<meta property="og:image" content="<?php echo $protocol.$server.$path; ?>/meta/img/share-code-small.png"/>
+<meta property="og:url" content="<?php echo $protocol.$server.$path.'/'.$fileName; ?>"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:creator" property="og:site_name" content="@jaclark"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="http://www.jasonclark.info"/>
+<!-- End Social Media Tags -->
 <link rel="alternate" type="application/rss+xml" title="MSU Libraries: Tools" href="http://feeds.feedburner.com/msulibrarySpotlightTools" />
 <style type="text/css" media="screen, projection, handheld">
 <!-- @import url("./meta/styles/default.css"); -->
