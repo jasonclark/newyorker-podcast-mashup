@@ -23,7 +23,7 @@ $fileNameURI = htmlentities(strip_tags($_SERVER['REQUEST_URI']));
 <title><?php echo($pageTitle); ?> : Montana State University Libraries</title>
 <meta name="description" content="Remix of a New Yorker podcast feed with a local .mp3 player."/>
 <!-- Social Media Tags -->
-<meta property="og:title" content="New Yorker Podcast Remix, Spotlight on Ficiton"/>
+<meta property="og:title" content="New Yorker Podcast Remix, Spotlight on Fiction"/>
 <meta property="og:description" content="Remix of a New Yorker podcast feed with a local .mp3 player."/>
 <meta property="og:image" content="<?php echo $protocol.$server.$path; ?>/meta/img/clark-share-default.png"/>
 <meta property="og:url" content="<?php echo $protocol.$server.$path.'/'.$fileName; ?>"/>
