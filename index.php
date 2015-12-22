@@ -32,78 +32,87 @@ $fileNameURI = htmlentities(strip_tags($_SERVER['REQUEST_URI']));
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="http://www.jasonclark.info"/>
 <!-- End Social Media Tags -->
-<link rel="alternate" type="application/rss+xml" title="MSU Libraries: Tools" href="http://feeds.feedburner.com/msulibrarySpotlightTools" />
-<style type="text/css" media="screen, projection, handheld">
-<!-- @import url("./meta/styles/default.css"); -->
-<!--
-<?php if ($customCSS != 'none') {
-	echo '@import url("'.dirname($_SERVER['PHP_SELF']).'/meta/styles/'.$customCSS.'");'."\n";
-}
-?>
--->
-</style>
+<link rel="alternate" type="application/rss+xml" title="MSU Libraries: Tools" href="http://feeds.feedburner.com/msulibrarySpotlightTools"/>
 <?php
+if ($customCSS != 'none') {
+?>
+<link rel="stylesheet" href="<?php echo dirname($_SERVER['PHP_SELF']); ?>/meta/styles/<?php echo $customCSS; ?>"/>
+<?php
+}
 if ($customScript) {
-  $counted = count($customScript);
-  for ($i = 0; $i < $counted; $i++) {
-   echo '<script type="text/javascript" src="'.$customScript[$i].'"></script>'."\n";
-  }
+	$counted = count($customScript);
+	for ($i = 0; $i < $counted; $i++) {
+?>
+<script type="text/javascript" src="<?php echo $customScript[$i]; ?>"></script>
+<?php
+	}
 }
 ?>
 </head>
 <body class="<?php if(!isset($_GET['view'])) { echo 'default'; } else { echo $_GET['view']; } ?>">
 <h1><?php echo $pageTitle; ?><span>: <?php echo $subTitle; ?></span><small>(Podcasts from The New Yorker)</small></h1>
 <div class="container">
-    <ul id="tabs">
-        <li id="tab1"><a href="./index.php">Now Playing</a></li>
-        <li id="tab2"><a href="./what.php">What is this?</a></li>
-        <li id="tab3"><a href="./code.txt">View Code</a></li>
-    </ul><!-- end tabs unordered list -->
+	<ul id="tabs">
+		<li id="tab1"><a href="./index.php">Now Playing</a></li>
+		<li id="tab2"><a href="./what.php">What is this?</a></li>
+		<li id="tab3"><a href="./code.txt">View Code</a></li>
+	</ul><!-- end tabs unordered list -->
 	<div class="main">
-	<?php
+<?php
 	//set default value for podcast feed
 	//new yorker poetry podcast feed
 	//$feed = isset($_GET['feed']) ? $_GET['feed'] : 'http://feeds.wnyc.org/tnypoetry?format=xml';
 	//new yorker fiction podcast feed
 	$feed = isset($_GET['feed']) ? $_GET['feed'] : 'http://feeds.wnyc.org/tnyfiction?format=xml';
-	
 	//set limit for number of items to display
-	$limit = (empty($_GET['limit'])) ? '15' : (int)$_GET['limit']
-
+	$limit = (empty($_GET['limit'])) ? '15' : (int)$_GET['limit'];
+	    
+	//request xml feed from external source 
 	$xml = simplexml_load_file($feed);
 	
 	$feedTitle = $xml->channel->title;
 	$feedDescription = html_entity_decode(substr($xml->channel->description,0,86)).'...';
-	
-	echo '<h2>'.$feedTitle.' <a class="feed" title="subscribe to '.$feedTitle.' " href="'.$request.'">Subscribe to the Feed</a></h2>'."\n";
-	echo '<p>'.$feedDescription.'</p>'."\n";
-	echo '<dl>'."\n";
-		if (!empty($xml->channel->item)) {
-			foreach ($xml->channel as $feed) {
-				//loop through items for display; number of items determined by $limit variable above
-				for ($i=0; $i<$limit; $i++) {
-					echo '<dt class="postTitle"><a href="'.$feed->item[$i]->link.'">'.html_entity_decode($feed->item[$i]->title).'</a><span class="date">'.substr($feed->item[$i]->pubDate,0,50).'</span></dt>'."\n";
-					echo '<dd>'.html_entity_decode($feed->item[$i]->description).'</dd>'."\n";
-					$itunes = $feed->item[$i]->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
-					echo '<dd>Keywords: '.$itunes->keywords.'</dd>'."\n";
-					//echo '<dd>Duration: '.$itunes->duration.' <a class="download" href="download.php?url='.$feed->item[$i]->link.'">Download file</a></dd>'."\n";
-					echo '<dd>Duration: '.$itunes->duration.' <a class="download" href="'.$feed->item[$i]->link.'">Download file</a></dd>'."\n";
-					echo '<dd class="postControls">
-					<object class="play" type="application/x-shockwave-flash" data="./meta/scripts/player.swf" width="300" height="30">
-					<param name="movie" value="./meta/scripts/player.swf" />
-					<param name="FlashVars" value="playerID=1&amp;soundFile='.$feed->item[$i]->link.'" />
-					<param name="quality" value="high" />
-					<param name="menu" value="false" />
-					<param name="wmode" value="transparent" />
-					</object>
-					</dd>'."\n";
-				}
+?>
+	<h2><?php echo $feedTitle; ?><a class="feed" title="subscribe to <?php echo $feedTitle; ?>" href="<?php echo $feed; ?>">Subscribe to the Feed</a></h2>
+	<p><?php echo $feedDescription; ?></p>
+	<dl>
+<?php
+	if (!empty($xml->channel->item)) {
+		foreach ($xml->channel as $feed) {
+		//loop through items for display; number of items determined by $limit variable above
+			for ($i=0; $i<$limit; $i++) {
+				//get media file
+				$attrs = $feed->item[$i]->enclosure->attributes();
+				$mediaFile = $attrs['url'];
+				//get blog post link
+				$postLink = $feed->item[$i]->link;
+?>
+		<dt class="postTitle"><a href="<?php echo $postLink; ?>"><?php echo html_entity_decode($feed->item[$i]->title); ?></a><span class="date"><?php echo substr($feed->item[$i]->pubDate,0,50); ?></span></dt>
+		<dd><?php echo html_entity_decode($feed->item[$i]->description); ?></dd>
+<?php			
+		$itunes = $feed->item[$i]->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
+?>
+		<dd>Keywords: <?php echo $itunes->keywords; ?></dd>
+		<dd>Duration: <?php echo $itunes->duration; ?> <a class="download" href="<?php echo $mediaFile; ?>">Download file</a></dd>
+		<dd class="postControls">
+			<object class="play" type="application/x-shockwave-flash" data="./meta/scripts/player.swf" width="300" height="30">
+			<param name="movie" value="./meta/scripts/player.swf" />
+			<param name="FlashVars" value="playerID=1&amp;soundFile=<?php echo $mediaFile; ?>" />
+			<param name="quality" value="high" />
+			<param name="menu" value="false" />
+			<param name="wmode" value="transparent" />
+			</object>
+		</dd>
+<?php
 			}
-		} else {
-			echo '<dt>There are no items available at this time. Check back with us later.</dt>'."\n";
 		}
-	echo '</dl>'."\n";
-	?>
+	} else {
+?>
+		<dt>There are no items available at this time. Check back with us later.</dt>
+<?php
+	}
+?>
+	</dl>
 	</div><!-- end div main -->
 </div><!-- end container div -->
 </body>
