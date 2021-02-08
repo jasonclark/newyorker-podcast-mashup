@@ -64,7 +64,9 @@ if ($customScript) {
 	//$feed = isset($_GET['feed']) ? $_GET['feed'] : 'http://feeds.wnyc.org/tnypoetry?format=xml';
 	//new yorker fiction podcast feed
 	$feed = isset($_GET['feed']) ? $_GET['feed'] : 'http://feeds.wnyc.org/tnyfiction?format=xml';
-	//set limit for number of items to display
+	//$feed = isset($_GET['feed']) ? $_GET['feed'] : 'https://feeds.npr.org/510200/podcast.xml';
+
+        //set limit for number of items to display
 	$limit = (empty($_GET['limit'])) ? '15' : (int)$_GET['limit'];
 	    
 	//request xml feed from external source 
@@ -95,13 +97,20 @@ if ($customScript) {
 		<dd>Keywords: <?php echo $itunes->keywords; ?></dd>
 		<dd>Duration: <?php echo $itunes->duration; ?> <a class="download" href="<?php echo $mediaFile; ?>">Download file</a></dd>
 		<dd class="postControls">
-			<object class="play" type="application/x-shockwave-flash" data="./meta/scripts/player.swf" width="300" height="30">
+			<!--<object class="play" type="application/x-shockwave-flash" data="./meta/scripts/player.swf" width="300" height="30">
 			<param name="movie" value="./meta/scripts/player.swf" />
-			<param name="FlashVars" value="playerID=1&amp;soundFile=<?php echo $mediaFile; ?>" />
+			<param name="FlashVars" value="playerID=1&amp;soundFile=<?php //echo $mediaFile; ?>" />
 			<param name="quality" value="high" />
 			<param name="menu" value="false" />
 			<param name="wmode" value="transparent" />
-			</object>
+			</object>-->
+
+    <audio
+        controls
+        src="<?php echo $mediaFile; ?>">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
 		</dd>
 <?php
 			}
